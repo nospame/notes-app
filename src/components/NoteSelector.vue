@@ -1,14 +1,19 @@
+<script>
+export default {
+  props: ["note", "selectedNoteId"],
+  methods: {
+    selectNote: function (note) {
+      this.$emit("selectNote", note);
+      console.log('selecting from NoteSelector');
+    }
+  }
+}
+
+</script>
+
 <template>
-  <div class="note-selector active">
-    <p class="note-selector-title">First note...</p>
-    <p class="note-selector-timestamp">Timestamp here...</p>
-  </div>
-  <div class="note-selector">
-    <p class="note-selector-title">Second note...</p>
-    <p class="note-selector-timestamp">Timestamp here...</p>
-  </div>
-  <div class="note-selector">
-    <p class="note-selector-title">Third note...</p>
-    <p class="note-selector-timestamp">Timestamp here...</p>
+  <div class="note-selector" v-bind:class="{ active: selectedNoteId == note.id }" v-on:click="selectNote(note)">
+    <p class="note-selector-title">{{ selectedNoteId }}{{ note.id }}{{ note.body }}</p>
+    <p class="note-selector-timestamp">{{ note.timestamp }}</p>
   </div>
 </template>
